@@ -54,10 +54,14 @@ const Index = () => {
     navigate('/medicine/dolo650');
   };
 
+  const handleSeeAll = () => {
+    navigate('/pharmacies');
+  };
+
   return (
     <MobileLayout>
       <div className="flex flex-col p-4">
-        <h1 className="text-center text-white text-3xl font-bold my-4">MediBuddy</h1>
+        <h1 className="text-center text-white text-3xl font-bold my-4">Ozy</h1>
         
         <UserProfile 
           name="Ashita C"
@@ -103,7 +107,7 @@ const Index = () => {
         </div>
         
         <div className="mt-6">
-          <SectionTitle title="Near You" linkTo="/nearby" />
+          <SectionTitle title="Near You" linkTo="/pharmacies" linkText="See all" />
           
           <div className="grid grid-cols-3 gap-3">
             {nearbyPharmacies.map((pharmacy) => (

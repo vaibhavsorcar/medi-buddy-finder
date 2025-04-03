@@ -54,7 +54,11 @@ const MobileLayout: React.FC<MobileLayoutProps> = ({ children }) => {
               icon={item.icon}
               label={item.label}
               to={item.path}
-              isActive={currentPath === item.path}
+              isActive={
+                item.path === '/' 
+                  ? currentPath === '/' 
+                  : currentPath.startsWith(item.path)
+              }
             />
           ))}
         </div>

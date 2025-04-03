@@ -1,23 +1,64 @@
 
-import React from 'react';
-import { Search, Mic } from 'lucide-react';
+import React, { useState } from 'react';
+import { Search, Mic, Camera, Filter } from 'lucide-react';
+import { toast } from 'sonner';
+import { useNavigate } from 'react-router-dom';
 
 interface SearchBarProps {
   placeholder?: string;
   onSearch?: (query: string) => void;
   withVoice?: boolean;
+  withCamera?: boolean;
+  withFilter?: boolean;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ 
   placeholder = "Search for medicines...", 
   onSearch,
-  withVoice = true
+  withVoice = true,
+  withCamera = true,
+  withFilter = true
 }) => {
-  const [query, setQuery] = React.useState('');
-
+  const [query, setQuery] = useState('');
+  const navigate = useNavigate();
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (onSearch) onSearch(query);
+  };
+
+  const handleMicClick = () => {
+    toast.info("Voice search activated", {
+      description: "Please speak now to search for medicines..."
+    });
+    
+    // In a real app, implement Web Speech API here
+    setTimeout(() => {
+      toast.success("Voice detected", {
+        description: "Searching for 'paracetamol'..."
+      });
+      setQuery('paracetamol');
+      if (onSearch) onSearch('paracetamol');
+    }, 2000);
+  };
+
+  const handleCameraClick = () => {
+    toast.info("Camera activated", {
+      description: "Position the medicine box or barcode in the camera frame"
+    });
+    
+    // In a real app, implement camera API and barcode reading here
+    setTimeout(() => {
+      toast.success("Barcode detected", {
+        description: "Found: DOLO 650"
+      });
+      setQuery('DOLO 650');
+      if (onSearch) onSearch('DOLO 650');
+    }, 2000);
+  };
+
+  const handleFilterClick = () => {
+    navigate('/search');
   };
 
   return (
@@ -33,14 +74,35 @@ const SearchBar: React.FC<SearchBarProps> = ({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
         />
-        {withVoice && (
-          <button
-            type="button"
-            className="absolute inset-y-0 right-0 flex items-center pr-3 text-primary"
-          >
-            <Mic className="w-5 h-5" />
-          </button>
-        )}
+        <div className="absolute inset-y-0 right-0 flex items-center gap-1">
+          {withVoice && (
+            <button
+              type="button"
+              className="text-accent p-1 hover:text-accent/80 focus:outline-none"
+              onClick={handleMicClick}
+            >
+              <Mic className="w-5 h-5" />
+            </button>
+          )}
+          {withCamera && (
+            <button
+              type="button"
+              className="text-accent p-1 hover:text-accent/80 focus:outline-none"
+              onClick={handleCameraClick}
+            >
+              <Camera className="w-5 h-5" />
+            </button>
+          )}
+          {withFilter && (
+            <button
+              type="button"
+              className="text-accent p-1 hover:text-accent/80 focus:outline-none mr-2"
+              onClick={handleFilterClick}
+            >
+              <Filter className="w-5 h-5" />
+            </button>
+          )}
+        </div>
       </div>
     </form>
   );
