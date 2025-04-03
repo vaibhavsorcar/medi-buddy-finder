@@ -1,16 +1,14 @@
 
-import { Bell } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Badge } from '@/components/ui/badge';
+import NotificationPanel from '@/components/notifications/NotificationPanel';
 
 interface UserProfileProps {
   name: string;
   email: string;
   avatarUrl?: string;
-  notificationCount?: number;
 }
 
-const UserProfile = ({ name, email, avatarUrl, notificationCount = 0 }: UserProfileProps) => {
+const UserProfile = ({ name, email, avatarUrl }: UserProfileProps) => {
   return (
     <div className="flex items-center justify-between p-4 animate-fade-in">
       <div className="flex items-center gap-3">
@@ -25,16 +23,7 @@ const UserProfile = ({ name, email, avatarUrl, notificationCount = 0 }: UserProf
           <p className="text-xs opacity-90">{email}</p>
         </div>
       </div>
-      <div className="relative">
-        <button className="p-2 bg-white rounded-full text-gray-700">
-          <Bell size={20} />
-        </button>
-        {notificationCount > 0 && (
-          <Badge className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center p-0 rounded-full">
-            {notificationCount}
-          </Badge>
-        )}
-      </div>
+      <NotificationPanel />
     </div>
   );
 };

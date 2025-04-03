@@ -5,61 +5,13 @@ import { ChevronLeft, Search as SearchIcon, Mic, Camera, Filter, X } from 'lucid
 import { Button } from '@/components/ui/button';
 import MobileLayout from '@/components/layout/MobileLayout';
 import { toast } from 'sonner';
+import { medicines, getMedicineRecommendations } from '@/data/medicines';
 
 const Search = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const query = searchParams.get('q') || '';
   const filterType = searchParams.get('filter') || 'all';
-  
-  // Mock search results - in a real app would come from an API
-  const searchResults = query ? [
-    {
-      id: 'dolo650',
-      name: 'DOLO 650',
-      composition: 'Paracetamol 650mg',
-      price: 30,
-      availability: 'In Stock',
-      image: '/lovable-uploads/92490f7a-fd7a-44cc-a221-49265e903b5e.png',
-      type: 'tablet'
-    },
-    {
-      id: 'calpol500',
-      name: 'Calpol 500',
-      composition: 'Paracetamol 500mg',
-      price: 25,
-      availability: 'In Stock',
-      image: 'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?q=80&w=300&auto=format&fit=crop',
-      type: 'tablet'
-    },
-    {
-      id: 'paracip650',
-      name: 'Paracip 650',
-      composition: 'Paracetamol 650mg',
-      price: 35,
-      availability: 'Limited Stock',
-      image: 'https://images.unsplash.com/photo-1631549916768-4119b2e5f926?q=80&w=300&auto=format&fit=crop',
-      type: 'capsule'
-    },
-    {
-      id: 'azithral500',
-      name: 'Azithral 500',
-      composition: 'Azithromycin 500mg',
-      price: 125,
-      availability: 'In Stock',
-      image: 'https://images.unsplash.com/photo-1603807008857-ad66b70431e2?q=80&w=300&auto=format&fit=crop',
-      type: 'capsule'
-    },
-    {
-      id: 'benadryl',
-      name: 'Benadryl Cough Syrup',
-      composition: 'Diphenhydramine, Ammonium Chloride',
-      price: 85,
-      availability: 'In Stock',
-      image: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?q=80&w=300&auto=format&fit=crop',
-      type: 'syrup'
-    }
-  ] : [];
   
   // Popular search suggestions
   const popularMedicines = [
@@ -81,6 +33,18 @@ const Search = () => {
   });
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
+
+  // Mock search results filtering based on the query and filters
+  const searchResults = query ? 
+    medicines
+      .filter(med => {
+        const matchesQuery = med.name.toLowerCase().includes(query.toLowerCase()) || 
+                        med.composition.toLowerCase().includes(query.toLowerCase());
+        
+        const matchesType = selectedFilters.type === 'all' || med.type === selectedFilters.type;
+        
+        return matchesQuery && matchesType;
+      }) : [];
 
   useEffect(() => {
     if (searchQuery) {
@@ -118,13 +82,6 @@ const Search = () => {
       filter: selectedFilters.type
     });
   };
-
-  const filteredResults = searchResults.filter(result => {
-    if (selectedFilters.type !== 'all' && result.type !== selectedFilters.type) {
-      return false;
-    }
-    return true;
-  });
 
   const handleMicClick = () => {
     toast.info("Voice search activated", {
@@ -277,9 +234,9 @@ const Search = () => {
             <h2 className="text-xl font-semibold text-white mb-4">
               Search results for "{query}"
             </h2>
-            {filteredResults.length > 0 ? (
+            {searchResults.length > 0 ? (
               <div className="space-y-3">
-                {filteredResults.map((result) => (
+                {searchResults.map((result) => (
                   <div 
                     key={result.id}
                     className="bg-white rounded-lg p-3 flex items-center shadow-md animate-fade-in"

@@ -67,7 +67,6 @@ const Index = () => {
           name="Ashita C"
           email="ashitacc@gmail.com"
           avatarUrl="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=100&auto=format&fit=crop"
-          notificationCount={1}
         />
         
         <div className="mt-6">
@@ -132,20 +131,20 @@ const Index = () => {
               title="Book a Physician"
               description="Connect with trusted doctors for online consultations"
               icon={<UserRound className="h-8 w-8 text-medical-teal" />}
-              onClick={() => navigate('/book-doctor')}
+              onClick={() => navigate('/services')}
             />
             <FeatureCard
               title="Daily Reminders"
               description="Set reminders to take your medicines on time"
               icon={<Clock className="h-8 w-8 text-medical-orange" />}
-              onClick={() => navigate('/reminders')}
+              onClick={() => navigate('/services')}
             />
           </div>
           
           <button 
             className="w-full mt-4 py-3 bg-medical-orange text-white font-medium rounded-full shadow-lg flex items-center justify-center animate-fade-in"
             style={{ animationDelay: '0.4s' }}
-            onClick={() => navigate('/alternatives')}
+            onClick={() => navigate('/search')}
           >
             Find Alternatives
           </button>
