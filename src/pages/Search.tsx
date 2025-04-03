@@ -112,7 +112,8 @@ const Search = () => {
               </div>
             )}
           </div>
-        ) : (
+        )}
+        {!query && (
           <div className="text-center py-10">
             <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center mx-auto mb-4">
               <SearchIcon size={24} className="text-white" />
