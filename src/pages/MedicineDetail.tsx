@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Play, Clock, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,7 @@ import MobileLayout from '@/components/layout/MobileLayout';
 const MedicineDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const [isHovered, setIsHovered] = useState(false);
 
   // Mock data - in a real app would come from an API
   const medicineInfo = {
@@ -45,15 +46,33 @@ const MedicineDetail: React.FC = () => {
         
         <div className="grid grid-cols-2 gap-2 my-6">
           <div className="bg-white rounded-xl p-4 h-40 flex items-center justify-center">
-            <img src={medicineInfo.image1} alt={medicineInfo.name} className="max-h-full object-contain" />
+            {/* Replacing image1 with a map */}
+            <div className="w-full h-full rounded-lg overflow-hidden">
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.5831373741296!2d77.60657427581334!3d12.934608116346312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae151605e7f097%3A0x8c8b3b1c43216321!2sBTM%20Layout%2C%20Bengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1712236049903!5m2!1sen!2sin" 
+                className="w-full h-full" 
+                style={{border: 0}} 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade">
+              </iframe>
+            </div>
           </div>
           <div className="bg-white rounded-xl p-4 h-40 flex items-center justify-center">
             <img src={medicineInfo.image2} alt={medicineInfo.name} className="max-h-full object-contain" />
           </div>
-          <div className="col-span-1 bg-black/10 backdrop-blur-sm rounded-xl p-4 h-40 flex items-center justify-center">
+          <div 
+            className={`col-span-1 bg-black/10 backdrop-blur-sm rounded-xl p-4 h-40 flex items-center justify-center cursor-pointer ${isHovered ? 'ring-2 ring-white/50' : ''}`}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+          >
             <div className="flex flex-col items-center">
-              <Play size={48} className="text-white mb-2" />
-              <p className="text-white text-sm font-semibold">How to use</p>
+              <Play 
+                size={48} 
+                className={`mb-2 transition-all duration-300 ${isHovered ? 'text-medical-orange animate-pulse' : 'text-white'}`} 
+              />
+              <p className={`text-sm font-semibold transition-all duration-300 ${isHovered ? 'text-medical-orange' : 'text-white'}`}>
+                How to use
+              </p>
             </div>
           </div>
         </div>

@@ -39,9 +39,15 @@ const NotificationItem: React.FC<{ notification: Notification }> = ({ notificati
     }
   };
 
+  const handleDismiss = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation(); // Prevent triggering the parent click handler
+    markAsRead(notification.id);
+    toast.success(`Notification dismissed`);
+  };
+
   return (
     <div 
-      className={`p-4 border-b ${notification.read ? 'bg-white' : 'bg-blue-50'}`}
+      className={`p-4 border-b ${notification.read ? 'bg-white' : 'bg-blue-50'} relative`}
       onClick={handleClick}
     >
       <div className="flex items-start">
@@ -58,6 +64,14 @@ const NotificationItem: React.FC<{ notification: Notification }> = ({ notificati
           <p className="text-sm text-gray-600 mt-1">{notification.message}</p>
           <p className="text-xs text-gray-500 mt-1">{notification.time}</p>
         </div>
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="absolute top-2 right-2 h-6 w-6 text-gray-400 hover:text-gray-600"
+          onClick={handleDismiss}
+        >
+          <X size={16} />
+        </Button>
       </div>
     </div>
   );

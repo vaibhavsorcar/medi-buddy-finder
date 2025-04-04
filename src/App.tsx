@@ -14,6 +14,8 @@ import Premium from "./pages/Premium";
 import Services from "./pages/Services";
 import Settings from "./pages/Settings";
 import NotFound from "./pages/NotFound";
+import PhysicianBooking from "./pages/PhysicianBooking";
+import Reminders from "./pages/Reminders";
 
 const queryClient = new QueryClient();
 
@@ -33,6 +35,8 @@ const App = () => (
             <Route path="/premium" element={<Premium />} />
             <Route path="/services" element={<Services />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/physician-booking" element={<PhysicianBooking />} />
+            <Route path="/reminders" element={<Reminders />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Clock, UserRound } from 'lucide-react';
 import MobileLayout from '@/components/layout/MobileLayout';
@@ -8,9 +8,11 @@ import SearchBar from '@/components/search/SearchBar';
 import PharmacyCard from '@/components/pharmacy/PharmacyCard';
 import FeatureCard from '@/components/common/FeatureCard';
 import SectionTitle from '@/components/common/SectionTitle';
+import AlternativeFinderDialog from '@/components/medicine/AlternativeFinderDialog';
 
 const Index = () => {
   const navigate = useNavigate();
+  const [showAlternativeDialog, setShowAlternativeDialog] = useState(false);
 
   // Mock data for pharmacies
   const nearbyPharmacies = [
@@ -60,7 +62,14 @@ const Index = () => {
 
   return (
     <MobileLayout>
-      <div className="flex flex-col p-4">
+      <div 
+        className="flex flex-col p-4 relative"
+        style={{
+          backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.7) 100%), url(https://images.unsplash.com/photo-1631549916768-4119b2e5f926?q=80&w=600&auto=format&fit=crop)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
         <h1 className="text-center text-white text-3xl font-bold my-4">Ozy</h1>
         
         <UserProfile 
@@ -131,25 +140,30 @@ const Index = () => {
               title="Book a Physician"
               description="Connect with trusted doctors for online consultations"
               icon={<UserRound className="h-8 w-8 text-medical-teal" />}
-              onClick={() => navigate('/services')}
+              onClick={() => navigate('/physician-booking')}
             />
             <FeatureCard
               title="Daily Reminders"
               description="Set reminders to take your medicines on time"
               icon={<Clock className="h-8 w-8 text-medical-orange" />}
-              onClick={() => navigate('/services')}
+              onClick={() => navigate('/reminders')}
             />
           </div>
           
           <button 
             className="w-full mt-4 py-3 bg-medical-orange text-white font-medium rounded-full shadow-lg flex items-center justify-center animate-fade-in"
             style={{ animationDelay: '0.4s' }}
-            onClick={() => navigate('/search')}
+            onClick={() => setShowAlternativeDialog(true)}
           >
             Find Alternatives
           </button>
         </div>
       </div>
+
+      <AlternativeFinderDialog 
+        open={showAlternativeDialog} 
+        onOpenChange={setShowAlternativeDialog} 
+      />
     </MobileLayout>
   );
 };

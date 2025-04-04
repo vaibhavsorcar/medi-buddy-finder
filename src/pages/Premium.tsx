@@ -72,8 +72,9 @@ const PlanCard: React.FC<PlanProps> = ({
       <CardFooter className="p-6 pt-0">
         <Button 
           onClick={onSelect}
-          className={recommended ? 'bg-accent hover:bg-accent/90 w-full' : 'w-full'}
+          className={`${recommended ? 'bg-accent hover:bg-accent/90' : ''} w-full shadow-md hover:shadow-lg transition-shadow py-6 text-base font-semibold`}
           variant={recommended ? 'default' : 'outline'}
+          size="lg"
         >
           Choose Plan
         </Button>
