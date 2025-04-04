@@ -65,7 +65,7 @@ const Index = () => {
       <div 
         className="flex flex-col p-4 relative"
         style={{
-          backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.7) 100%), url(https://images.unsplash.com/photo-1631549916768-4119b2e5f926?q=80&w=600&auto=format&fit=crop)',
+          backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.7) 100%),',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
