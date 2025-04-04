@@ -1,10 +1,10 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, Mic, Camera, Filter } from 'lucide-react';
 import { toast } from 'sonner';
 import { useNavigate } from 'react-router-dom';
 import { getMedicineRecommendations } from '@/data/medicines';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 interface SearchBarProps {
   placeholder?: string;
@@ -29,10 +29,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [showCameraDialog, setShowCameraDialog] = useState(false);
   const navigate = useNavigate();
   
-  // Create a ref for speech recognition
   const recognitionRef = useRef<any>(null);
 
-  // Initialize speech recognition when component mounts
   useEffect(() => {
     if (withVoice && 'webkitSpeechRecognition' in window) {
       const SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
@@ -71,7 +69,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
     };
   }, [withVoice, navigate, onSearch]);
   
-  // Handle search suggestions
   useEffect(() => {
     if (query.length > 1) {
       const results = getMedicineRecommendations(query);
@@ -125,7 +122,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
     
     setShowCameraDialog(true);
     
-    // Simulate camera scan result after a short delay
     setTimeout(() => {
       setShowCameraDialog(false);
       toast.success("Barcode detected", {
@@ -201,7 +197,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </div>
       </form>
 
-      {/* Search suggestions */}
       {showSuggestions && (
         <div className="absolute top-full left-0 right-0 bg-white rounded-md shadow-lg mt-1 z-50 max-h-60 overflow-y-auto">
           {suggestions.map((suggestion) => (
@@ -217,7 +212,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </div>
       )}
 
-      {/* Voice search dialog */}
       <Dialog open={showVoiceDialog} onOpenChange={setShowVoiceDialog}>
         <DialogContent className="sm:max-w-md" onInteractOutside={stopVoiceRecognition}>
           <DialogHeader>
@@ -241,7 +235,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </DialogContent>
       </Dialog>
 
-      {/* Camera dialog */}
       <Dialog open={showCameraDialog} onOpenChange={setShowCameraDialog}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
