@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Clock, UserRound } from 'lucide-react';
@@ -62,7 +63,7 @@ const Index = () => {
       <div 
         className="flex flex-col p-4 relative"
         style={{
-          backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.7) 100%)',
+          backgroundImage: 'linear-gradient(to bottom, #668eb3, #8cb3d7)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
