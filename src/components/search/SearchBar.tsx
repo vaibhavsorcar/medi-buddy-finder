@@ -153,7 +153,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     <div className="w-full relative animate-fade-in" style={{animationDelay: '0.1s'}}>
       <form onSubmit={handleSubmit} className="relative">
         <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-          <Search className="w-5 h-5 text-gray-500" />
+          <Search className="w-5 h-5 text-black-500" />
         </div>
         <input
           type="search"
@@ -202,11 +202,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
           {suggestions.map((suggestion) => (
             <div 
               key={suggestion.id} 
-              className="px-4 py-3 hover:bg-gray-100 cursor-pointer"
+              className="px-4 py-3 hover:bg-black-100 cursor-pointer"
               onClick={() => handleSuggestionClick(suggestion.id, suggestion.name)}
             >
               <div className="font-medium">{suggestion.name}</div>
-              <div className="text-xs text-gray-500">{suggestion.composition}</div>
+              <div className="text-xs text-black-500">{suggestion.composition}</div>
             </div>
           ))}
         </div>
@@ -219,7 +219,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           </DialogHeader>
           <div className="flex flex-col items-center justify-center py-6">
             <div className={`w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mb-4 ${isListening ? 'animate-pulse' : ''}`}>
-              <Mic className={`h-10 w-10 ${isListening ? 'text-accent' : 'text-gray-400'}`} />
+              <Mic className={`h-10 w-10 ${isListening ? 'text-accent' : 'text-black-400'}`} />
             </div>
             <p className="text-center">
               {isListening ? "Listening... Speak now" : "Ready to listen"}
@@ -241,9 +241,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
             <DialogTitle>Scan Medicine</DialogTitle>
           </DialogHeader>
           <div className="flex flex-col items-center justify-center py-6">
-            <div className="w-full aspect-video bg-gray-100 rounded-md mb-4 relative">
+            <div className="w-full aspect-video bg-black-100 rounded-md mb-4 relative">
               <div className="absolute inset-0 flex items-center justify-center">
-                <Camera className="h-10 w-10 text-gray-400 animate-pulse" />
+                <Camera className="h-10 w-10 text-black-400 animate-pulse" />
               </div>
               <div className="absolute inset-0 border-2 border-accent/50 rounded-md">
                 <div className="absolute top-0 w-full h-1 bg-accent animate-scan"></div>
