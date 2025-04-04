@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { ChevronLeft, Search as SearchIcon, Mic, Camera, Filter, X } from 'lucide-react';
@@ -13,7 +12,6 @@ const Search = () => {
   const query = searchParams.get('q') || '';
   const filterType = searchParams.get('filter') || 'all';
   
-  // Popular search suggestions
   const popularMedicines = [
     'Dolo 650',
     'Crocin',
@@ -34,7 +32,6 @@ const Search = () => {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>([]);
 
-  // Mock search results filtering based on the query and filters
   const searchResults = query ? 
     medicines
       .filter(med => {
@@ -88,7 +85,6 @@ const Search = () => {
       description: "Please speak now to search for medicines..."
     });
     
-    // In a real app, implement Web Speech API here
     setTimeout(() => {
       toast.success("Voice detected", {
         description: "Searching for 'paracetamol'..."
@@ -103,7 +99,6 @@ const Search = () => {
       description: "Position the medicine box or barcode in the camera frame"
     });
     
-    // In a real app, implement camera API and barcode reading here
     setTimeout(() => {
       toast.success("Barcode detected", {
         description: "Found: DOLO 650"
@@ -133,7 +128,7 @@ const Search = () => {
 
         <form onSubmit={handleSearch} className="relative mb-6">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-            <SearchIcon className="w-5 h-5 text-gray-500" />
+            <SearchIcon className="w-5 h-5 text-black" />
           </div>
           <input
             type="search"
@@ -149,7 +144,7 @@ const Search = () => {
               type="button" 
               variant="ghost" 
               size="icon" 
-              className="h-8 w-8 text-accent hover:bg-transparent"
+              className="h-8 w-8 text-black hover:bg-transparent"
               onClick={handleMicClick}
             >
               <Mic className="h-5 w-5" />
@@ -158,7 +153,7 @@ const Search = () => {
               type="button" 
               variant="ghost" 
               size="icon" 
-              className="h-8 w-8 text-accent hover:bg-transparent"
+              className="h-8 w-8 text-black hover:bg-transparent"
               onClick={handleCameraClick}
             >
               <Camera className="h-5 w-5" />
@@ -167,7 +162,7 @@ const Search = () => {
               type="button" 
               variant="ghost" 
               size="icon" 
-              className={`h-8 w-8 ${showFilterPanel ? 'text-accent bg-accent/20' : 'text-accent'} hover:bg-transparent`}
+              className={`h-8 w-8 ${showFilterPanel ? 'text-accent bg-accent/20' : 'text-black'} hover:bg-transparent`}
               onClick={() => setShowFilterPanel(!showFilterPanel)}
             >
               <Filter className="h-5 w-5" />

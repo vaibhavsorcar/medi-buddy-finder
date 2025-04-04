@@ -169,7 +169,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             <button
               type="button"
               className={`p-1 focus:outline-none ${
-                isListening ? "text-accent animate-pulse" : "text-accent hover:text-accent/80"
+                isListening ? "text-accent animate-pulse" : "text-black hover:text-black/80"
               }`}
               onClick={handleMicClick}
             >
@@ -179,7 +179,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           {withCamera && (
             <button
               type="button"
-              className="text-accent p-1 hover:text-accent/80 focus:outline-none"
+              className="text-black p-1 hover:text-black/80 focus:outline-none"
               onClick={handleCameraClick}
             >
               <Camera className="w-5 h-5" />
@@ -188,7 +188,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           {withFilter && (
             <button
               type="button"
-              className="text-accent p-1 hover:text-accent/80 focus:outline-none mr-2"
+              className="text-black p-1 hover:text-black/80 focus:outline-none mr-2"
               onClick={handleFilterClick}
             >
               <Filter className="w-5 h-5" />

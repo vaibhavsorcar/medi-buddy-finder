@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Clock, UserRound } from 'lucide-react';
@@ -14,7 +13,6 @@ const Index = () => {
   const navigate = useNavigate();
   const [showAlternativeDialog, setShowAlternativeDialog] = useState(false);
 
-  // Mock data for pharmacies
   const nearbyPharmacies = [
     {
       id: '1',
@@ -43,7 +41,6 @@ const Index = () => {
   ];
 
   const handleSearchMedicine = (query: string) => {
-    // In a real app, this would search the medicine database
     console.log('Searching for:', query);
     navigate(`/search?q=${query}`);
   };
@@ -65,7 +62,7 @@ const Index = () => {
       <div 
         className="flex flex-col p-4 relative"
         style={{
-          backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.7) 100%),',
+          backgroundImage: 'linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.7) 100%)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
         }}
